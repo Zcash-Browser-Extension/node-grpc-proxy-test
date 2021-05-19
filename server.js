@@ -1,10 +1,12 @@
 //const express = require('express')
 const http = require('http')
 const bodyParser = require('body-parser')
+const helloWorld = require('./grpc_calls/hello_world.js')
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
-        res.write('Hello world (from server)')
+        let sum = helloWorld.data.sumNumbers(2,3)
+        res.write(sum.toString())
         res.end()
     }
 })
