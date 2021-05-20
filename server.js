@@ -5,9 +5,10 @@ const helloWorld = require('./grpc_calls/hello_world_grpc_test.js')
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
-        let sum = helloWorld.data.helloWorld()
-        res.write(sum.toString())
-        res.end()
+        helloWorld.data.helloWorld().then((value) => {
+            res.write(value.toString())
+            res.end()
+        })
     }
 })
 

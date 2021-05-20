@@ -1,6 +1,6 @@
 let methods = {}
 
-methods.helloWorld = function() {
+methods.helloWorld = async () => {
     var PROTO_PATH = __dirname + '/../proto/helloworld.proto';
 
     var parseArgs = require('minimist');
