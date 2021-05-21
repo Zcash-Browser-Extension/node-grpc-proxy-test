@@ -5,9 +5,9 @@ const helloWorld = require('./grpc_calls/hello_world_grpc_test.js')
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
         const client = helloWorld.data.helloWorld()
-        client.sayHello({name: 'Sam'}, function(err, response) { 
+        client.sayHello({name: 'James'}, function(err, response) { 
             if(err) throw new Error("Error while fetching fetching data")
-            res.write(response.message)
+            res.write(JSON.stringify(response.message))
             res.end()
         }) 
     }
