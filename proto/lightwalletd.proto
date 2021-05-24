@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.lightwalletd";
+option java_outer_classname = "LightwalletdProto";
+option objc_class_prefix = "LW";
+
+package lightwalletd;
+
+// Service definition
+service cash.z.wallet.sdk.rpc.CompactTxStreamer {
+    // Method calls
+    rpc GetLightdInfo (GetLightdInfoRequest) returns (GetLightdInfoReply) {}
+}
+
+// The request message (empty)
+message GetLightdInfoRequest {
+
+}
+
+// The response message containing the greetings
+message GetLightdInfoReply {
+  string message = 1;
+}
