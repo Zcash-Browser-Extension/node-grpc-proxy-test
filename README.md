@@ -1,9 +1,9 @@
 # node-grpc-proxy-test
 
 POTENTIAL list of grpc calls on lightwalletd (pulled from call listing all available methods on the public lightwalletd instance - grpcurl mainnet.lightwalletd.com:9067 list cash.z.wallet.sdk.rpc.CompactTxStreamer)
-* [GetAddressUtxos] (https://zcash-rpc.github.io/getaddressutxos.html)
+* [GetAddressUtxos](https://zcash-rpc.github.io/getaddressutxos.html)
 * GetAddressUtxosStream
-* [GetBlock] (https://zcash-rpc.github.io/getblock.html)
+* [GetBlock](https://zcash-rpc.github.io/getblock.html)
 * GetBlockRange
 * GetLatestBlock
 * GetLightdInfo
@@ -11,9 +11,9 @@ POTENTIAL list of grpc calls on lightwalletd (pulled from call listing all avail
 * GetTaddressBalance
 * GetTaddressBalanceStream
 * GetTaddressTxids
-* [GetTransaction] (https://zcash-rpc.github.io/gettransaction.html)
+* [GetTransaction](https://zcash-rpc.github.io/gettransaction.html)
 * GetTreeState
-* [Ping] (https://zcash-rpc.github.io/ping.html)
+* [Ping](https://zcash-rpc.github.io/ping.html)
 * SendTransaction
 
 To start node server: npm run dev
