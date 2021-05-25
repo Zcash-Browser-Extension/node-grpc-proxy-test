@@ -27,6 +27,12 @@ https://github.com/adityapk00/zecwallet-light-cli/blob/4a279179f885e9867809ba4bd
         SERVER                        SERVICE                                 METHOD
 grpcurl mainnet.lightwalletd.com:9067 cash.z.wallet.sdk.rpc.CompactTxStreamer/GetLightdInfo
 
+# envoy links
+* [Get Envoy server running locally](https://github.com/adityapk00/zecwallet-lite/tree/wasm#run-envoy-proxy-locally)
+* [Envoy YAML file](https://github.com/adityapk00/zecwallet-lite/blob/wasm/envoy/envoy.yaml)
+* [Bridge to make calls to Envoy server from extension JS](https://github.com/adityapk00/zecwallet-lite/blob/wasm/app/wasm/wasmbridge.js)
+* [Stub file for the JS side to import](https://github.com/adityapk00/zecwallet-lite/blob/wasm/app/grpc/service_grpc_web_pb.js)
+
 # to run
 To start node server: npm run dev
 To start grpc test server: in code/node-grpc-server-test run node greeter_server.js
