@@ -15,10 +15,10 @@ const server = http.createServer((req, res) => {
         const client = getLightdInfo.data.getLightdInfo()
         client.GetLightdInfo({}, function(err, response) { 
             if(err) console.log("Error while fetching fetching data")
-            console.log(err)
-            res.write("Placeholder")
-            //res.write(JSON.stringify(response.message))
-            res.end()
+            console.log(response)
+            let parsedResponse = JSON.stringify(response)
+            res.setHeader('Content-Type', 'application/json')
+            res.end(parsedResponse)
         })
     }
 })
