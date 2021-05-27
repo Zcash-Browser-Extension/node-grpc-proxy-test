@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
         }) 
     } else if (req.url === '/getLightdInfo') {
         const client = CompactTxStreamer.data.CompactTxStreamer()
-        client.GetLightdInfo({}, function(err, response) { 
+        client['GetLightdInfo']({}, function(err, response) { 
             if(err) {
                 console.log("Error while fetching data")
                 console.log(err)
