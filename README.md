@@ -32,6 +32,7 @@ grpcurl mainnet.lightwalletd.com:9067 cash.z.wallet.sdk.rpc.CompactTxStreamer/Ge
 * [Envoy YAML file](https://github.com/adityapk00/zecwallet-lite/blob/wasm/envoy/envoy.yaml)
 * [Bridge to make calls to Envoy server from extension JS](https://github.com/adityapk00/zecwallet-lite/blob/wasm/app/wasm/wasmbridge.js)
 * [Stub file for the JS side to import](https://github.com/adityapk00/zecwallet-lite/blob/wasm/app/grpc/service_grpc_web_pb.js)
+* [Note docker instances can't use localhost on OSX](https://runnable.com/docker/install-docker-on-macos)
 
 # to run
 To start node server: npm run dev

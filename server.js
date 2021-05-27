@@ -6,7 +6,7 @@ const getLightdInfo = require('./grpc_calls/getLightdInfo.js')
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
         const client = helloWorld.data.helloWorld()
-        client.sayHello({name: 'James'}, function(err, response) { 
+        client.sayHello({name: 'Ronnie'}, function(err, response) { 
             if(err) throw new Error("Error while fetching fetching data")
             res.write(JSON.stringify(response.message))
             res.end()
@@ -15,10 +15,11 @@ const server = http.createServer((req, res) => {
         const client = getLightdInfo.data.getLightdInfo()
         client.GetLightdInfo({}, function(err, response) { 
             if(err) console.log("Error while fetching fetching data")
-            console.log(response)
+            console.log(err)
+            res.write("Placeholder")
             //res.write(JSON.stringify(response.message))
-            //res.end()
-        }) 
+            res.end()
+        })
     }
 })
 
