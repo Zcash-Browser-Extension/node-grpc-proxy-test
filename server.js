@@ -1,7 +1,7 @@
 const http = require('http')
 const bodyParser = require('body-parser')
 const helloWorld = require('./grpc_calls/hello_world_grpc_test.js')
-const getLightdInfo = require('./grpc_calls/getLightdInfo.js')
+const CompactTxStreamer = require('./grpc_calls/CompactTxStreamer.js')
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
@@ -12,10 +12,12 @@ const server = http.createServer((req, res) => {
             res.end()
         }) 
     } else if (req.url === '/getLightdInfo') {
-        const client = getLightdInfo.data.getLightdInfo()
+        const client = CompactTxStreamer.data.CompactTxStreamer()
         client.GetLightdInfo({}, function(err, response) { 
-            if(err) console.log("Error while fetching fetching data")
-            console.log(response)
+            if(err) {
+                console.log("Error while fetching data")
+                console.log(err)
+            }
             let parsedResponse = JSON.stringify(response)
             res.setHeader('Content-Type', 'application/json')
             res.end(parsedResponse)
