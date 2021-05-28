@@ -1,10 +1,9 @@
 /*
     # to do
-        * Need to limit to https
+        * Need to limit to https - https://dev.to/omergulen/step-by-step-node-express-ssl-certificate-run-https-server-from-scratch-in-5-steps-5b87
         * Logging
         * Rate limiting
 */
-
 
 const express = require('express')
 const bodyParser = require('body-parser')
