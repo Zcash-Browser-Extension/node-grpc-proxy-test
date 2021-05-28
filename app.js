@@ -10,7 +10,7 @@ const jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-const methodWhitelist = ['GetLightdInfo']
+const methodWhitelist = ['GetBlock','GetLightdInfo']
 
 app.post('/', jsonParser, function (req, res) {
     if (methodWhitelist.includes(req.body.method)) {
@@ -22,9 +22,6 @@ app.post('/', jsonParser, function (req, res) {
                 res.status(500).send('Call error')
             }
             res.status(200).json(response)
-            //let parsedResponse = JSON.stringify(response)
-            //res.setHeader('Content-Type', 'application/json')
-            //res.end(parsedResponse)
         })        
     } else {
         res.status(400).send('Bad call')
