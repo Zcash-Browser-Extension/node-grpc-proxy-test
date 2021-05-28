@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const CompactTxStreamer = require('./grpc_calls/CompactTxStreamer.js')
 
 const app = express()
 
@@ -7,13 +8,31 @@ const app = express()
 const jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.get('/', (req, res) => {
-    res.send('Successful response.');
-  });
+const methodWhitelist = ['GetLightdInfo']
+
+app.post('/', jsonParser, function (req, res) {
+    if (methodWhitelist.includes(req.body.method)) {
+        const client = CompactTxStreamer.data.CompactTxStreamer()
+        client[req.body.method](req.body.params, function(err, response) { 
+            if(err) {
+                console.log("Error while fetching data")
+                console.log(err)
+                res.status(500).send('Call error')
+            }
+            res.status(200).json(response)
+            //let parsedResponse = JSON.stringify(response)
+            //res.setHeader('Content-Type', 'application/json')
+            //res.end(parsedResponse)
+        })        
+    } else {
+        res.status(400).send('Bad call')
+    }
+});
 
 app.listen(8000, () => console.log('Example app is listening on port 8000.'));
+
 /*
 const http = require('http')
 const bodyParser = require('body-parser')
