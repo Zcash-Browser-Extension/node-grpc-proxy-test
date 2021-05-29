@@ -1,19 +1,19 @@
 # node-grpc-proxy-test
 
 POTENTIAL list of grpc calls on lightwalletd (pulled from call listing all available methods on the public lightwalletd instance - grpcurl mainnet.lightwalletd.com:9067 list cash.z.wallet.sdk.rpc.CompactTxStreamer)
-* [GetAddressUtxos](https://zcash-rpc.github.io/getaddressutxos.html)
+* [GetAddressUtxos](https://zcash-rpc.github.io/getaddressutxos.html) **
 * GetAddressUtxosStream
-* [GetBlock](https://zcash-rpc.github.io/getblock.html)
-* GetBlockRange
-* GetLatestBlock
-* GetLightdInfo
+* [GetBlock](https://zcash-rpc.github.io/getblock.html) **
+* GetBlockRange ** 
+* GetLatestBlock ** 
+* GetLightdInfo ** 
 * GetMempoolTx
-* GetTaddressBalance
+* GetTaddressBalance **
 * GetTaddressBalanceStream
-* GetTaddressTxids
-* [GetTransaction](https://zcash-rpc.github.io/gettransaction.html)
-* GetTreeState
-* [Ping](https://zcash-rpc.github.io/ping.html)
+* GetTaddressTxids 
+* [GetTransaction](https://zcash-rpc.github.io/gettransaction.html) *X
+* GetTreeState ** (implemented but responds with 'zcashd did not return treestate')
+* [Ping](https://zcash-rpc.github.io/ping.html) **
 * SendTransaction
 
 # research

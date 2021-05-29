@@ -1,6 +1,7 @@
 /*
     # to do
         * Need to limit to https - https://dev.to/omergulen/step-by-step-node-express-ssl-certificate-run-https-server-from-scratch-in-5-steps-5b87
+        * Sanitizing input
         * Logging
         * Rate limiting
 */
@@ -17,7 +18,17 @@ const jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-const methodWhitelist = ['GetBlock','GetLightdInfo']
+const methodWhitelist = [
+    'GetAddressUtxos', 
+    'GetBlock', 
+    'GetLatestBlock', 
+    'GetLightdInfo', 
+    'GetTaddressBalance',
+    'GetTaddressTxids', 
+    'GetTransaction',
+    'GetTreeState',
+    'Ping'
+]
 
 app.post('/', jsonParser, function (req, res) {
     if (methodWhitelist.includes(req.body.method)) {
@@ -26,7 +37,7 @@ app.post('/', jsonParser, function (req, res) {
             if(err) {
                 console.log("Error while fetching data")
                 console.log(err)
-                res.status(500).send('Call error')
+                res.status(500).send(`Call error. Code: ${err.code}, Error: ${err.details}`)
             }
             res.status(200).json(response)
         })        
