@@ -8,9 +8,19 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const rateLimit = require("express-rate-limit")
 const CompactTxStreamer = require('./grpc_calls/CompactTxStreamer.js')
 
 const app = express()
+
+// rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 200 // limit each IP to 100 requests per windowMs
+  });
+  
+// apply to all requests
+app.use(limiter);
 
 // create application/json parser
 const jsonParser = bodyParser.json()
@@ -25,9 +35,11 @@ const methodWhitelistStreamServer = [
     'GetTaddressTxids' 
 ]
 
+/*
 const methodWhitelistStreamClient = [
     'GetTaddressBalanceStream'
 ]
+*/
 
 const methodWhitelistBasic = [
     'GetAddressUtxos',
@@ -61,7 +73,6 @@ app.post('/', jsonParser, function (req, res) {
         });
         call.on('status', function(status) {
           // process status
-          console.log(`Process status: ${status}`)
         });        
     } else if (methodWhitelistBasic.includes(req.body.method)) {
         console.log('Basic call')
