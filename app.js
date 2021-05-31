@@ -19,19 +19,26 @@ const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const methodWhitelistStreamServer = [
+    'GetAddressUtxosStream',
     'GetBlockRange',
-    'GetTaddressTxids'
+    'GetMempoolTx',
+    'GetTaddressTxids' 
+]
+
+const methodWhitelistStreamClient = [
+    'GetTaddressBalanceStream'
 ]
 
 const methodWhitelistBasic = [
-    'GetAddressUtxos', 
+    'GetAddressUtxos',
     'GetBlock', 
     'GetLatestBlock', 
     'GetLightdInfo', 
     'GetTaddressBalance', 
     'GetTransaction',
-    'GetTreeState',
-    'Ping'
+    'GetTreeState', 
+    'Ping',
+    'SendTransaction'
 ]
 
 app.post('/', jsonParser, function (req, res) {
@@ -42,7 +49,6 @@ app.post('/', jsonParser, function (req, res) {
         const call = client[req.body.method](req.body.params)
         let streamData = []
         call.on('data', function(data) {
-            console.log(`Data is: ${data}`)
             streamData.push(data)
         });
         call.on('end', function() {

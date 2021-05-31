@@ -2,19 +2,19 @@
 
 POTENTIAL list of grpc calls on lightwalletd (pulled from call listing all available methods on the public lightwalletd instance - grpcurl mainnet.lightwalletd.com:9067 list cash.z.wallet.sdk.rpc.CompactTxStreamer)
 * [GetAddressUtxos](https://zcash-rpc.github.io/getaddressutxos.html) **
-* GetAddressUtxosStream
+* GetAddressUtxosStream **
 * [GetBlock](https://zcash-rpc.github.io/getblock.html) **
 * GetBlockRange ** 
 * GetLatestBlock ** 
 * GetLightdInfo ** 
-* GetMempoolTx
+* GetMempoolTx **
 * GetTaddressBalance **
 * GetTaddressBalanceStream
-* GetTaddressTxids 
+* GetTaddressTxids  **
 * [GetTransaction](https://zcash-rpc.github.io/gettransaction.html) *X
 * GetTreeState ** (implemented but responds with 'zcashd did not return treestate')
 * [Ping](https://zcash-rpc.github.io/ping.html) **
-* SendTransaction
+* SendTransaction **
 
 # research
 https://grpc.io/docs/languages/node/quickstart/
