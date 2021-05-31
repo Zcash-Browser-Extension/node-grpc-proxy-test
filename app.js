@@ -18,21 +18,48 @@ const jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-const methodWhitelist = [
+const methodWhitelistStreamServer = [
+    'GetBlockRange',
+    'GetTaddressTxids'
+]
+
+const methodWhitelistBasic = [
     'GetAddressUtxos', 
     'GetBlock', 
     'GetLatestBlock', 
     'GetLightdInfo', 
-    'GetTaddressBalance',
-    'GetTaddressTxids', 
+    'GetTaddressBalance', 
     'GetTransaction',
     'GetTreeState',
     'Ping'
 ]
 
 app.post('/', jsonParser, function (req, res) {
-    if (methodWhitelist.includes(req.body.method)) {
-        const client = CompactTxStreamer.data.CompactTxStreamer()
+    const client = CompactTxStreamer.data.CompactTxStreamer()
+
+    if (methodWhitelistStreamServer.includes(req.body.method)) {
+        console.log('Steam server')
+        const call = client[req.body.method](req.body.params)
+        let streamData = []
+        call.on('data', function(data) {
+            console.log(`Data is: ${data}`)
+            streamData.push(data)
+        });
+        call.on('end', function() {
+          // The server has finished sending
+          res.status(200).json(streamData)
+        });
+        call.on('error', function(e) {
+          // An error has occurred and the stream has been closed.
+          res.status(500).send(`Call error. Error: ${e}`)
+        });
+        call.on('status', function(status) {
+          // process status
+          console.log(`Process status: ${status}`)
+        });        
+    } else if (methodWhitelistBasic.includes(req.body.method)) {
+        console.log('Basic call')
+        //const client = CompactTxStreamer.data.CompactTxStreamer()
         client[req.body.method](req.body.params, function(err, response) { 
             if(err) {
                 console.log("Error while fetching data")
@@ -40,7 +67,7 @@ app.post('/', jsonParser, function (req, res) {
                 res.status(500).send(`Call error. Code: ${err.code}, Error: ${err.details}`)
             }
             res.status(200).json(response)
-        })        
+        })    
     } else {
         res.status(400).send('Bad call')
     }
