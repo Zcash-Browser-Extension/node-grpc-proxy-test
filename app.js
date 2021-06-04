@@ -3,7 +3,7 @@
         * Need to limit to https - https://dev.to/omergulen/step-by-step-node-express-ssl-certificate-run-https-server-from-scratch-in-5-steps-5b87
         * Sanitizing input
         * Logging
-        * Rate limiting
+        **Rate limiting
 */
 
 const express = require('express')
@@ -12,6 +12,13 @@ const rateLimit = require("express-rate-limit")
 const CompactTxStreamer = require('./grpc_calls/CompactTxStreamer.js')
 
 const app = express()
+
+// cors
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 // rate limiting
 const limiter = rateLimit({
@@ -86,6 +93,7 @@ app.post('/', jsonParser, function (req, res) {
             res.status(200).json(response)
         })    
     } else {
+        console.log(req.body)
         res.status(400).send('Bad call')
     }
 });
