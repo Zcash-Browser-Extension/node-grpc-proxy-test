@@ -15,7 +15,7 @@ methods.CompactTxStreamer = function () {
         });
     const lightwalletd_proto = grpc.loadPackageDefinition(packageDefinition).cash.z.wallet.sdk.rpc
         
-    //const target = 'localhosr:9067'
+    //const target = 'localhost:9067'
     //let client = new lightwalletd_proto.CompactTxStreamer(target,grpc.credentials.createInsecure())
     
     const target = 'mainnet.lightwalletd.com:9067'

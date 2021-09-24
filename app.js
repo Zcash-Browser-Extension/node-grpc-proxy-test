@@ -4,6 +4,8 @@
         * Sanitizing input
         * Logging
         **Rate limiting
+
+    # example calls are in local postman directory
 */
 
 const express = require('express')
